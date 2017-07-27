@@ -2,7 +2,7 @@
 
 Name:           rust-packaging
 Version:        4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        RPM macros for building Rust packages on various architectures
 
 License:        MIT
@@ -83,6 +83,9 @@ py.test-%{python3_version} -v test.py
 %{python3_sitelib}/rust2rpm/
 
 %changelog
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 4-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Sat Jul 08 2017 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 4-2
 - Include license
 
