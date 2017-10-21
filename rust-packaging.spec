@@ -55,7 +55,7 @@ lang=C.UTF-8
 lang=en_US.UTF-8
 %endif
 %endif
-[ -n "$lang" ] && sed -r -i -e "s|(%\{_bindir\}/cargo-inspector)|env LANG=$lang \1|" data/cargo.attr data/macros.cargo
+[ -z "$lang" ] || sed -r -i -e "s|(%\{_bindir\}/cargo-inspector)|env LANG=$lang \1|" data/cargo.attr data/macros.cargo
 
 %build
 %py3_build
