@@ -1,0 +1,41 @@
+From 9e0a872ece6f5aedf76ffd67044f22c7d0cba8aa Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <ignatenkobrain@fedoraproject.org>
+Date: Fri, 20 Oct 2017 18:04:31 +0200
+Subject: [PATCH 1/2] inspector: inject cargo dependency in runtime
+
+Fixes: https://pagure.io/fedora-rust/rust2rpm/issue/42
+Signed-off-by: Igor Gnatenko <ignatenkobrain@fedoraproject.org>
+---
+ rust2rpm/__main__.py  | 1 +
+ rust2rpm/inspector.py | 3 +++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/rust2rpm/__main__.py b/rust2rpm/__main__.py
+index 0121a33..bb92fa3 100644
+--- a/rust2rpm/__main__.py
++++ b/rust2rpm/__main__.py
+@@ -91,6 +91,7 @@ Provides:       {{ prv }}
+ {% endfor %}
+ {% endif %}
+ {% if include_requires %}
++Requires:       cargo
+ {% if md.requires|length > 0 %}
+ # [dependencies]
+ {% for req in md.requires|sort(attribute="name") %}
+diff --git a/rust2rpm/inspector.py b/rust2rpm/inspector.py
+index d08f1aa..6ccdbc2 100644
+--- a/rust2rpm/inspector.py
++++ b/rust2rpm/inspector.py
+@@ -38,6 +38,9 @@ def main():
+             print_deps(list(itertools.chain(md.requires, md.build_requires)))
+         if args.test_requires:
+             print_deps(md.test_requires)
++        if args.requires:
++            # Someone should own /usr/share/cargo/registry
++            print("cargo")
+ 
+ if __name__ == "__main__":
+     main()
+-- 
+2.14.2
+
