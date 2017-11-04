@@ -2,7 +2,7 @@
 
 Name:           rust-packaging
 Version:        4
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        RPM macros for building Rust packages on various architectures
 
 License:        MIT
@@ -20,6 +20,8 @@ ExclusiveArch:  %{rust_arches} noarch
 Requires:       gawk >= 4.1.0
 Requires:       python3-rust2rpm = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires:       rust-srpm-macros = %{version}
+# Remove in F29
+Obsoletes:      rust-rpm-macros < 2-2
 
 %description
 The package provides macros for building projects in Rust
@@ -87,6 +89,9 @@ py.test-%{python3_version} -v test.py
 %{python3_sitelib}/rust2rpm/
 
 %changelog
+* Sat Nov 04 2017 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 4-7
+- Add Obsoletes for rust-rpm-macros
+
 * Sat Nov 04 2017 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 4-6
 - Use cp instead of install
 
