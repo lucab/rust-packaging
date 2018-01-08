@@ -1,0 +1,31 @@
+From 5313b352712486b4001827b04d906bdb91be2314 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <ignatenkobrain@fedoraproject.org>
+Date: Mon, 8 Jan 2018 23:57:03 +0100
+Subject: [PATCH] macros: remove Cargo.lock
+
+cargo-package automatically strips it out, but we package also some
+things directly from git.
+
+Acked-by: Josh Stone <jistone@redhat.com>
+Signed-off-by: Igor Gnatenko <ignatenkobrain@fedoraproject.org>
+---
+ data/macros.cargo | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/data/macros.cargo b/data/macros.cargo
+index ebf3edb..288554c 100644
+--- a/data/macros.cargo
++++ b/data/macros.cargo
+@@ -27,7 +27,8 @@ directory = "%{cargo_registry}"\
+ [source.crates-io]\
+ registry = "https://crates.io"\
+ replace-with = "local-registry"\
+-EOF\
++EOF \
++%{__rm} -f Cargo.lock \
+ %if ! %{with check} \
+ # https://github.com/rust-lang/cargo/issues/3732 \
+ %{__awk} -i inplace -v INPLACE_SUFFIX=.orig '/^\\\[dev-dependencies/{f=1;next} /^\\\[/{f=0}; !f' Cargo.toml \
+-- 
+2.15.1
+
