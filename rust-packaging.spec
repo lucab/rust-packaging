@@ -1,17 +1,13 @@
 %bcond_without check
 
 Name:           rust-packaging
-Version:        4
-Release:        7%{?dist}
+Version:        5
+Release:        1%{?dist}
 Summary:        RPM macros for building Rust packages on various architectures
 
 License:        MIT
 URL:            https://pagure.io/fedora-rust/rust2rpm
 Source0:        https://releases.pagure.org/fedora-rust/rust2rpm/rust2rpm-%{version}.tar.xz
-# Commits since last release
-Patch0001:      0001-inspector-inject-cargo-dependency-in-runtime.patch
-Patch0002:      0002-inspector-inject-rust-packaging-dependency-in-buildt.patch
-Patch0003:      0003-use-cp-instead-of-install.patch
 
 BuildArch:      noarch
 ExclusiveArch:  %{rust_arches} noarch
@@ -89,6 +85,9 @@ py.test-%{python3_version} -v test.py
 %{python3_sitelib}/rust2rpm/
 
 %changelog
+* Mon Jan 08 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5-1
+- Update to 5
+
 * Sat Nov 04 2017 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 4-7
 - Add Obsoletes for rust-rpm-macros
 
