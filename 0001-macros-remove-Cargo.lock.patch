@@ -1,7 +1,7 @@
 From 5313b352712486b4001827b04d906bdb91be2314 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <ignatenkobrain@fedoraproject.org>
 Date: Mon, 8 Jan 2018 23:57:03 +0100
-Subject: [PATCH] macros: remove Cargo.lock
+Subject: [PATCH 1/2] macros: remove Cargo.lock
 
 cargo-package automatically strips it out, but we package also some
 things directly from git.

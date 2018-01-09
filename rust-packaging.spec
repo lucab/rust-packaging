@@ -2,13 +2,14 @@
 
 Name:           rust-packaging
 Version:        5
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        RPM macros for building Rust packages on various architectures
 
 License:        MIT
 URL:            https://pagure.io/fedora-rust/rust2rpm
 Source0:        https://releases.pagure.org/fedora-rust/rust2rpm/rust2rpm-%{version}.tar.xz
 Patch0001:      0001-macros-remove-Cargo.lock.patch
+Patch0002:      0002-macros-remove-spurious-whitespace.patch
 
 BuildArch:      noarch
 ExclusiveArch:  %{rust_arches} noarch
@@ -86,6 +87,9 @@ py.test-%{python3_version} -v test.py
 %{python3_sitelib}/rust2rpm/
 
 %changelog
+* Tue Jan 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5-3
+- Fix syntax error
+
 * Tue Jan 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5-2
 - Remove Cargo.lock
 

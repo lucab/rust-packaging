@@ -1,0 +1,28 @@
+From cd6329635329fc7742a18f7ed0933298a0c56cf7 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <ignatenkobrain@fedoraproject.org>
+Date: Tue, 9 Jan 2018 06:52:36 +0100
+Subject: [PATCH 2/2] macros: remove spurious whitespace
+
+Fixes: https://pagure.io/fedora-rust/rust2rpm/issue/48
+Reported-by: Josh Stone <jistone@redhat.com>
+Signed-off-by: Igor Gnatenko <ignatenkobrain@fedoraproject.org>
+---
+ data/macros.cargo | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/data/macros.cargo b/data/macros.cargo
+index 288554c..67b1950 100644
+--- a/data/macros.cargo
++++ b/data/macros.cargo
+@@ -27,7 +27,7 @@ directory = "%{cargo_registry}"\
+ [source.crates-io]\
+ registry = "https://crates.io"\
+ replace-with = "local-registry"\
+-EOF \
++EOF\
+ %{__rm} -f Cargo.lock \
+ %if ! %{with check} \
+ # https://github.com/rust-lang/cargo/issues/3732 \
+-- 
+2.15.1
+
