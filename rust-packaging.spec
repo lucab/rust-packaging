@@ -71,7 +71,7 @@ install -D -p -m 0644 -t %{buildroot}%{_rpmconfigdir}/fileattrs data/cargo.attr
 
 %if %{with check}
 %check
-py.test-%{python3_version} -v test.py
+py.test-%{python3_version} -vv test.py
 %endif
 
 %files
