@@ -52,7 +52,7 @@ Provides:       rust2rpm = %{version}-%{release}
 %prep
 %autosetup -n rust2rpm-%{version} -p1
 lang=
-%if (0%{?fedora} && 0%{?fedora} <= 25) || (0%{?rhel} && 0%{?rhel} <= 7)
+%if 0%{?rhel} && 0%{?rhel} <= 7
 lang=C.UTF-8
 %else
 %if 0%{?mageia}
