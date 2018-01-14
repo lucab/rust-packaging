@@ -66,8 +66,8 @@ lang=en_US.UTF-8
 
 %install
 %py3_install
-install -D -p -m 0644 -t %{buildroot}%{_rpmconfigdir}/macros.d data/macros.rust data/macros.cargo
-install -D -p -m 0644 -t %{buildroot}%{_rpmconfigdir}/fileattrs data/cargo.attr
+install -D -p -m 0644 -t %{buildroot}%{_rpmmacrodir} data/macros.rust data/macros.cargo
+install -D -p -m 0644 -t %{buildroot}%{_fileattrsdir} data/cargo.attr
 
 %if %{with check}
 %check
@@ -75,9 +75,9 @@ py.test-%{python3_version} -vv test.py
 %endif
 
 %files
-%{_rpmconfigdir}/macros.d/macros.rust
-%{_rpmconfigdir}/macros.d/macros.cargo
-%{_rpmconfigdir}/fileattrs/cargo.attr
+%{_rpmmacrodir}/macros.rust
+%{_rpmmacrodir}/macros.cargo
+%{_fileattrsdir}/cargo.attr
 
 %files -n python3-rust2rpm
 %license LICENSE
