@@ -2,7 +2,7 @@
 
 Name:           rust-packaging
 Version:        5
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        RPM macros for building Rust packages on various architectures
 
 License:        MIT
@@ -18,6 +18,8 @@ ExclusiveArch:  %{rust_arches} noarch
 Requires:       gawk >= 4.1.0
 Requires:       python3-rust2rpm = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires:       rust-srpm-macros = %{version}
+Requires:       rust
+Requires:       cargo
 # Remove in F29
 Obsoletes:      rust-rpm-macros < 2-2
 
@@ -87,6 +89,9 @@ py.test-%{python3_version} -vv test.py
 %{python3_sitelib}/rust2rpm/
 
 %changelog
+* Tue Feb 20 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5-5
+- Explicitly require rust/cargo
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 5-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
