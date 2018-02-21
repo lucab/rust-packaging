@@ -2,7 +2,7 @@
 
 Name:           rust-packaging
 Version:        5
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        RPM macros for building Rust packages on various architectures
 
 License:        MIT
@@ -10,6 +10,7 @@ URL:            https://pagure.io/fedora-rust/rust2rpm
 Source0:        https://releases.pagure.org/fedora-rust/rust2rpm/rust2rpm-%{version}.tar.xz
 Patch0001:      0001-macros-remove-Cargo.lock.patch
 Patch0002:      0002-macros-remove-spurious-whitespace.patch
+Patch0003:      0003-macros-pass-__cargo_common_opts-to-cargo_install.patch
 
 BuildArch:      noarch
 ExclusiveArch:  %{rust_arches} noarch
@@ -41,9 +42,6 @@ Requires:       python3-semantic_version
 Requires:       python3-jinja2
 Requires:       python3-requests
 Requires:       python3-tqdm
-%if 0%{?mageia}
-Requires:       locales-en
-%endif
 Obsoletes:      rust2rpm < 1-8
 Provides:       rust2rpm = %{version}-%{release}
 %{?python_provide:%python_provide python3-rust2rpm}
@@ -53,15 +51,6 @@ Provides:       rust2rpm = %{version}-%{release}
 
 %prep
 %autosetup -n rust2rpm-%{version} -p1
-lang=
-%if 0%{?rhel} && 0%{?rhel} <= 7
-lang=C.UTF-8
-%else
-%if 0%{?mageia}
-lang=en_US.UTF-8
-%endif
-%endif
-[ -z "$lang" ] || sed -r -i -e "s|(%\{_bindir\}/cargo-inspector)|env LANG=$lang \1|" data/cargo.attr data/macros.cargo
 
 %build
 %py3_build
@@ -89,6 +78,9 @@ py.test-%{python3_version} -vv test.py
 %{python3_sitelib}/rust2rpm/
 
 %changelog
+* Wed Feb 21 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5-6
+- Pass %%__cargo_common_opts to %%cargo_install
+
 * Tue Feb 20 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5-5
 - Explicitly require rust/cargo
 
