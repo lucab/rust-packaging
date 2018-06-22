@@ -1,7 +1,7 @@
 From c5bab762f56bf07cd0f4a2e2d58b7c295cddedd8 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <ignatenkobrain@fedoraproject.org>
 Date: Tue, 20 Feb 2018 22:04:35 +0100
-Subject: [PATCH 3/3] macros: pass %__cargo_common_opts to %cargo_install
+Subject: [PATCH 3/5] macros: pass %__cargo_common_opts to %cargo_install
 
 Reason this has not been done before is that cargo-install doesn't
 understand --release. Let's just add it to other commands and be done
@@ -46,5 +46,5 @@ index 67b1950..22721e9 100644
  fi \
  )
 -- 
-2.16.2
+2.18.0.rc2
 

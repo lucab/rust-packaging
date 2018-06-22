@@ -1,0 +1,71 @@
+From 80237720ae3397fc66d8f06e13f868c4bd2723c1 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <ignatenkobrain@fedoraproject.org>
+Date: Fri, 22 Jun 2018 21:53:09 +0200
+Subject: [PATCH 5/5] macros: remove support for target-dir
+
+Signed-off-by: Igor Gnatenko <ignatenkobrain@fedoraproject.org>
+---
+ data/macros.cargo | 31 +++++++++++++++----------------
+ 1 file changed, 15 insertions(+), 16 deletions(-)
+
+diff --git a/data/macros.cargo b/data/macros.cargo
+index 96a2931..a0c456a 100644
+--- a/data/macros.cargo
++++ b/data/macros.cargo
+@@ -35,30 +35,29 @@ EOF\
+ %endif \
+ )
+ 
+-%__cargo_parse_opts(t:naf:) %{shrink:\
++%__cargo_parse_opts(naf:) %{shrink:\
+ %{-f:%{-a:%{error:Can't specify both -f(%{-f*}) and -a}}} \
+-  %{-t:--target-dir %{-t*}}                               \
+   %{-n:--no-default-features}                             \
+   %{-a:--all-features}                                    \
+   %{-f:--features %{-f*}}                                 \
+   %{nil}
+ }
+ 
+-%cargo_build(t:naf:) %{shrink:\
+-%{__cargo} build                                                  \
+-  %{__cargo_common_opts}                                          \
+-  --release                                                       \
+-  %{__cargo_parse_opts %{-t:-t%{-t*}} %{-n} %{-a} %{-f:-f%{-f*}}} \
+-  %*                                                              \
++%cargo_build(naf:) %{shrink:\
++%{__cargo} build                                   \
++  %{__cargo_common_opts}                           \
++  --release                                        \
++  %{__cargo_parse_opts %{-n} %{-a} %{-f:-f%{-f*}}} \
++  %*                                               \
+ }
+ 
+-%cargo_test(t:naf:) %{shrink:\
+-%{__cargo} test                                                   \
+-  %{__cargo_common_opts}                                          \
+-  --release                                                       \
+-  --no-fail-fast                                                  \
+-  %{__cargo_parse_opts %{-t:-t%{-t*}} %{-n} %{-a} %{-f:-f%{-f*}}} \
+-  %*                                                              \
++%cargo_test(naf:) %{shrink:\
++%{__cargo} test                                    \
++  %{__cargo_common_opts}                           \
++  --release                                        \
++  --no-fail-fast                                   \
++  %{__cargo_parse_opts %{-n} %{-a} %{-f:-f%{-f*}}} \
++  %*                                               \
+ }
+ 
+ %cargo_install(t:naf:) (\
+@@ -75,7 +74,7 @@ if %__cargo_is_lib; then                                            \
+   echo '{"files":{},"package":""}' > $REG_DIR/.cargo-checksum.json  \
+ fi \
+ if %__cargo_is_bin; then                                            \
+-  %{shrink:%{-t:CARGO_TARGET_DIR=%{-t*}} %{__cargo} install         \
++  %{shrink:%{__cargo} install                                       \
+     %{__cargo_common_opts}                                          \
+     --path .                                                        \
+     --root %{buildroot}%{_prefix}                                   \
+-- 
+2.18.0.rc2
+
