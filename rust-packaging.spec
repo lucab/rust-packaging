@@ -39,10 +39,10 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 %if %{with check}
 BuildRequires:  python%{python3_pkgversion}-pytest
 BuildRequires:  cargo
-BuildRequires:  python3-semantic_version
+BuildRequires:  python-semantic_version
 %endif
 Requires:       cargo
-Requires:       python3-semantic_version
+Requires:       python-semantic_version
 Requires:       python%{python3_pkgversion}-jinja2
 Requires:       python%{python3_pkgversion}-requests
 Requires:       python%{python3_pkgversion}-tqdm
