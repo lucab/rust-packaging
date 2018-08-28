@@ -61,8 +61,9 @@ Provides:       rust2rpm = %{version}-%{release}
 
 %install
 %py3_install
-install -D -p -m 0644 -t %{buildroot}%{_rpmmacrodir} data/macros.rust data/macros.cargo
-install -D -p -m 0644 -t %{buildroot}%{_fileattrsdir} data/cargo.attr
+install -p -m 0644 -d %{buildroot}%{_rpmmacrodir} %{buildroot}%{_fileattrsdir}
+install -p -m 0644 -D -t %{buildroot}%{_rpmmacrodir} data/macros.rust data/macros.cargo
+install -p -m 0644 -D -t %{buildroot}%{_fileattrsdir} data/cargo.attr
 
 %if %{with check}
 %check
