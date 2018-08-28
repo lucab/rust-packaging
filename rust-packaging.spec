@@ -1,5 +1,7 @@
 %bcond_without check
 
+%global srcname rust2rpm
+
 Name:           rust-packaging
 Version:        5
 Release:        11%{?dist}
@@ -19,7 +21,7 @@ ExclusiveArch:  %{rust_arches} noarch
 
 # gawk is needed for stripping dev-deps in macro, 4.1.0 is needed for inplace feature
 Requires:       gawk >= 4.1.0
-Requires:       python3-rust2rpm = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:       python%{python3_pkgversion}-rust2rpm = %{?epoch:%{epoch}:}%{version}-%{release}
 Requires:       rust-srpm-macros = %{version}
 Requires:       rust
 Requires:       cargo
@@ -30,25 +32,25 @@ Obsoletes:      rust-rpm-macros < 2-2
 The package provides macros for building projects in Rust
 on various architectures.
 
-%package     -n python3-rust2rpm
+%package     -n python%{python3_pkgversion}-rust2rpm
 Summary:        Convert Rust packages to RPM
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
 %if %{with check}
-BuildRequires:  python3-pytest
+BuildRequires:  python%{python3_pkgversion}-pytest
 BuildRequires:  cargo
 BuildRequires:  python3-semantic_version
 %endif
 Requires:       cargo
 Requires:       python3-semantic_version
-Requires:       python3-jinja2
-Requires:       python3-requests
-Requires:       python3-tqdm
+Requires:       python%{python3_pkgversion}-jinja2
+Requires:       python%{python3_pkgversion}-requests
+Requires:       python%{python3_pkgversion}-tqdm
 Obsoletes:      rust2rpm < 1-8
 Provides:       rust2rpm = %{version}-%{release}
-%{?python_provide:%python_provide python3-rust2rpm}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
-%description -n python3-rust2rpm
+%description -n python%{python3_pkgversion}-rust2rpm
 %{summary}.
 
 %prep
@@ -72,7 +74,7 @@ py.test-%{python3_version} -vv test.py
 %{_rpmmacrodir}/macros.cargo
 %{_fileattrsdir}/cargo.attr
 
-%files -n python3-rust2rpm
+%files -n python%{python3_pkgversion}-rust2rpm
 %license LICENSE
 %{_bindir}/rust2rpm
 %{_bindir}/cargo-inspector
